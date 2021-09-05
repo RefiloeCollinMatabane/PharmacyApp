@@ -1,0 +1,190 @@
+<h4 class="card-header">Inventory Management</h4>
+<form (submit)="onAddProduct(addproductform)" #addproductform="ngForm">
+    <mat-card class="mat-form-field--inline">
+    <!--<mat-form-field [style.width.px]="410" appearance="fill">
+       <mat-select> 
+        <mat-label>Product Code</mat-label>
+        <mat-option *ngFor="let product of products; let i=index" [ngValue]="product.pcode" [selected]="i==2" >{{product.pcode}}</mat-option>
+        <input matInput  ngModel  name="pcode" required #nameInput="ngModel"> 
+       </mat-select> 
+    </mat-form-field> -->
+    
+    <!-- <div class="ng-autocomplete">
+        <ng-autocomplete
+          required
+          [data]="selects"
+          [searchKeyword]="keyword"
+          placeHolder="Product Code"
+          (selected)='selectEvent($event)'
+          (inputChanged)='onChangeSearch($event)'
+          (inputFocused)='onFocused($event)'
+          historyIdentifier="selects"
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+      
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.pcode"></a>
+        </ng-template>
+      
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div> -->
+      <div class="container">
+      <div class="ng-autocomplete">
+          <ng-autocomplete #ngAutoCompleteStatic
+                           [data]="selects"
+                           name="pcode"
+                           [(ngModel)]="pcode"
+                           [initialValue]=""
+                           [placeHolder]="placeholder"
+                           [searchKeyword]="keyword"
+                           historyIdentifier="countriesTemplateList"
+                           [historyHeading]="historyHeading"
+                           historyListMaxNumber="3"
+                           notFoundText="Not found"
+                           [itemTemplate]="selectsTemplateStatic"
+                           [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+
+          <ng-template #selectsTemplateStatic let-item>
+            <a [innerHTML]="item.pcode"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+      </div>
+    
+      
+
+    <!-- <mat-form-field [style.width.px]="410" [style.margin-left.px]="520" appearance="fill" >
+    <mat-label>Supplier Code</mat-label>
+        <input matInput ngModel   name="supcode" required #nameInput="ngModel">  
+    </mat-form-field> [style.width.px]="410" -->
+
+
+    <div class="container"  [style.margin-left.px]="520">
+      <div class="ng-autocomplete">
+          <ng-autocomplete #ngAutoCompleteStatic
+                           [data]="selects2"
+                           name="supcode"
+                           [(ngModel)]="supcode"
+                           [initialValue]=""
+                           [placeHolder]="placeholder2"
+                           [searchKeyword]="keyword2"
+                           historyIdentifier="countriesTemplateList"
+                           [historyHeading]="historyHeading2"
+                           historyListMaxNumber="3"
+                           notFoundText="Not found"
+                           [itemTemplate]="selectsTemplateStatic"
+                           [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+
+          <ng-template #selectsTemplateStatic let-item>
+            <a [innerHTML]="item.supcode"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+      </div>
+
+    <br>
+
+    <mat-form-field [style.width.px]="410" appearance="fill">
+      <mat-label>Product Name</mat-label>
+        <input matInput ngModel value="{{pcode.pname}}" readonly readonly name="pname" >
+    </mat-form-field>
+
+    <mat-form-field [style.width.px]="410" [style.margin-left.px]="100" appearance="fill">
+     <mat-label>Supplier Name</mat-label>
+        <input matInput ngModel value="{{supcode.supname}}" readonly name="supname" >
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field [style.width.px]="410" appearance="fill">
+    <mat-label>Description</mat-label>
+        <input matInput  ngModel value="{{pcode.pdescription}}" readonly readonly name="pdescription" >
+    </mat-form-field>
+
+    <mat-form-field [style.width.px]="410" [style.margin-left.px]="100" appearance="fill">
+     <mat-label>Contact Number</mat-label> 
+        <input matInput placeholder="Contact Number" value="{{supcode.supnumber}}" ngModel readonly name="supnumber" >
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Product Qty</mat-label>
+        <input matInput placeholder="Product Qty" ngModel required  name="pqty" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+    <mat-label>Minimum Qty</mat-label> 
+        <input matInput value="{{pcode.pminqty}}" ngModel readonly  name="pminqty" >
+    </mat-form-field>
+
+    <mat-form-field [style.width.px]="410" [style.margin-left.px]="100" appearance="fill">
+    <mat-label>Supplier Address</mat-label>
+        <input matInput placeholder="Supplier Address" ngModel value="{{supcode.supaddress}}" readonly name="supaddress" >
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field [style.width.px]="130" appearance="fill">
+    <mat-label>Stock ID</mat-label>
+        <input matInput placeholder="Stock ID" ngModel required name="stockid" >
+    </mat-form-field>
+    <mat-form-field [style.width.px]="130" appearance="fill">
+    <mat-label>Unit Price</mat-label>
+        <input matInput placeholder="Unit Price" ngModel required  name="unitprice" >
+    </mat-form-field>
+
+    <mat-form-field [style.width.px]="130" appearance="fill">
+    <mat-label>Selling Price</mat-label>
+        <input matInput placeholder="Selling Price" ngModel required name="sellingprice" >
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>Manufact. date mm/dd/yyyy</mat-label>
+        <input matInput ngModel name="manudate" placeholder="Manufact. date mm/dd/yyyy" required [max]="maxDate" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+       <mat-label>Expiry Date mm/dd/yyyy</mat-label>
+        <input matInput ngModel  name="expdate" placeholder="Expiery date mm/dd/yyyy" required [min]="minDate"  [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field><!-- -->
+
+    <br>
+
+    <mat-radio-group class="radiobtn" name="paymenttype" aria-label="optionLabel">
+        <mat-radio-button [checked]="!showDateInput" value="1" (click)="radioValueCheck(1)">Cash</mat-radio-button>
+        <mat-radio-button [checked]="showDateInpu" value="2" (click)="radioValueCheck(2)">Credit</mat-radio-button>
+    </mat-radio-group> 
+    <mat-form-field [style.margin-left.px]="36" >
+       <mat-label>Set due date mm/dd/yyyy</mat-label>
+        <input ngModel  name="creditdue" placeholder="Set due date mm/dd/yyyy" [min]="minDate" [disabled]="!showDateInput"  matInput [matDatepicker]="picker2">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field><!-- -->
+
+    <button mat-raised-button [style.width.px]="100" [style.margin-left.px] = "100" type="submit" >Add</button>
+    <!--<button mat-raised-button [style.width.px]="100" [style.margin-left.px] = "20"  >Delete</button> (click)=""-->
+    <button mat-raised-button [style.width.px]="100" [style.margin-left.px] = "20" type="reset" >Reset</button>
+    <button mat-raised-button [style.width.px]="100" [style.margin-left.px] = "20" routerLink = '/stock' >Stock</button>
+    <button mat-raised-button [style.width.px]="100" [style.margin-left.px] = "20" routerLink = '/adminpanel' type="reset" >Back</button>    
+
+    </mat-card>
+    </form>
+
+    

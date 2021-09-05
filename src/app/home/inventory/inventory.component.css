@@ -1,0 +1,27 @@
+.mat-form-field--inline .mat-form-field  {
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.radiobtn {
+ margin-left: 10px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 50px;
+  }
+
+  .mat-menu {
+    background-color: teal !important;
+    height: 100px;
+  }
+
+  .container {
+    margin-top: 5px;
+    display: flex;
+  }
+  .ng-autocomplete {
+    max-height: 20px;
+    max-width: 410px;
+    appearance: fill;
+  }

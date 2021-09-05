@@ -1,0 +1,136 @@
+<h4 class="card-header">Billing Centre</h4>
+
+<mat-card style="height: 80px; width: 100%;">
+<form class="example-container" (ngSubmit)="addtolist(selectItems)" #selectItems="ngForm" >
+    <!-- <mat-form-field [style.width.px]="150" appearance="outline" class="example-full-width">
+        <mat-label>Item Code</mat-label>
+        <input matInput placeholder="Item Code" [(ngModel)]="selectItems.pcode" name="pcode"  >
+    </mat-form-field> -->
+
+    <mat-form-field [style.width.px]="150" appearance="outline" class="example-full-width">
+      <input type="text" placeholder="Item Code" aria-label="Number" [(ngModel)]="selectItems.pcode" name="pcode" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field [style.width.px]="150" [style.margin-left.px] = "10" appearance="outline"  class="example-full-width">
+        <mat-label>Item Name</mat-label>
+        <input matInput placeholder="Item Name" [(ngModel)]="selectItems.pname" name="pname"  >
+    </mat-form-field>
+
+    <mat-form-field [style.width.px]="150" [style.margin-left.px] = "10" appearance="outline"  class="example-full-width">
+      <mat-label>Item Description</mat-label>
+      <input matInput placeholder="Item Description" [(ngModel)]="selectItems.pdescription" name="pdescription"  >
+    </mat-form-field>
+
+    <mat-form-field [style.width.px]="150" [style.margin-left.px] = "10" appearance="outline"  class="example-full-width">
+      <mat-label>Unit Price</mat-label>
+      <input matInput placeholder="Price" [(ngModel)]="selectItems.unitprice" name="unitprice" >
+    </mat-form-field>
+
+    <mat-form-field [style.width.px]="150" [style.margin-left.px] = "10" appearance="outline"  class="example-full-width">
+      <mat-label>QTY</mat-label>
+      <input matInput placeholder="QTY" [(ngModel)]="selectItems.pqty" name="pqty"  >
+    </mat-form-field>
+    
+    <mat-form-field [style.width.px]="150" [style.margin-left.px] = "10" appearance="outline"  class="example-full-width">
+      <mat-label>Price</mat-label>
+      <input matInput placeholder="Price" [(ngModel)]="selectItems.price" name="price"  >
+    </mat-form-field>
+
+    <button mat-raised-button [style.width.px]="100" [style.hight.px]="100" [style.margin-left.px] = "10" type="submit" >Add</button>
+</form>
+</mat-card>
+<br>
+
+<div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="transactions">
+     
+      <!-- Itam count -->
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> # </th>
+        <td mat-cell  *matCellDef="let transaction"> {{transactions.item}} </td> 
+        <td mat-footer-cell *matFooterCellDef> Total </td>
+      </ng-container>  
+      
+      <!-- Item Code -->
+      <ng-container matColumnDef="icode">
+        <th mat-header-cell *matHeaderCellDef> Item code </th>
+        <td mat-cell *matCellDef="let transactions"> {{transactions.icode}} </td> 
+        <td mat-footer-cell *matFooterCellDef></td>  
+      </ng-container>
+
+      <!-- Item Name -->
+      <ng-container matColumnDef="iname">
+        <th mat-header-cell *matHeaderCellDef> Item name </th>
+        <td mat-cell *matCellDef="let transactions"> {{transactions.iname}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>  
+      </ng-container>
+
+      <!-- Item Discount -->
+      <ng-container matColumnDef="idescription">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+       <td mat-cell *matCellDef="let transactions"> {{transactions.idescription}} </td> 
+        <td mat-footer-cell *matFooterCellDef></td>  
+      </ng-container>
+
+      <!-- Item Price -->
+      <ng-container matColumnDef="uprice">
+        <th mat-header-cell *matHeaderCellDef> Unit Price </th>
+        <td mat-cell *matCellDef="let transactions"> {{transactions.uprice}} </td>   
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Item Name -->
+      <ng-container matColumnDef="qty">
+        <th mat-header-cell *matHeaderCellDef> QTY </th>
+        <td mat-cell *matCellDef="let transactions"> {{transactions.qty}} </td> 
+        <td mat-footer-cell *matFooterCellDef></td>   
+      </ng-container>
+  
+      <!-- Price Column -->
+      <ng-container matColumnDef="nprice">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let transactions">  </td>  <!--  {{transactions.cost| currency}} -->
+        <td mat-footer-cell *matFooterCellDef> </td>  <!--{{getTotalCost() | currency}} -->
+      </ng-container>
+
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+  </div>
+    <br>
+    <mat-card style="height: 80px; width: 100%; ">
+    <form class="example-container"  >
+      <!-- Total cost -->
+      <mat-form-field [style.width.px]="175" appearance="outline"  class="example-full-width">
+        <mat-label>Total</mat-label>
+        <input matInput placeholder="Total"  name="total" readonly ><!--value="{{total}}"-->
+      </mat-form-field>
+
+      <mat-label [style.margin-left.px] = "50"> <strong> - </strong> </mat-label>
+
+      <!-- Discount Input -->
+      <mat-form-field [style.width.px]="175" [style.margin-left.px] = "50" appearance="outline"  class="example-full-width">
+        <mat-label>Discount</mat-label>
+        <input matInput placeholder="Discount" name="discount"  >
+      </mat-form-field>
+
+      <mat-label [style.margin-left.px] = "50"> <strong> = </strong> </mat-label>
+  
+      <!-- Net Bill -->
+      <mat-form-field [style.width.px]="175" [style.margin-left.px] = "50" appearance="outline"  class="example-full-width">
+        <mat-label>Net Bill</mat-label>
+        <input matInput placeholder="Net Bill" name="netprice" readonly >
+      </mat-form-field> 
+      <button mat-raised-button [style.width.px]="100" [style.margin-left.px] = "50" type="submit" >Print Bill</button>
+      <button mat-raised-button [style.width.px]="100" [style.margin-left.px] = "50" type="submit" >Save Bill</button>
+    </form>
+  </mat-card>
+
+  

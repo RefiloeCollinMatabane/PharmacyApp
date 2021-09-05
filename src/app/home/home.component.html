@@ -1,0 +1,32 @@
+﻿<mat-card><mat-card-title>General Features</mat-card-title></mat-card>
+    <!--<div class="card mt-4"></div>
+     <div class="card-body">
+        <p>You're logged in with Angular 8 & JWT!!</p>
+        <p>Your role is: <strong>{{currentUser.role}}</strong>.</p>
+        <p>This page can be accessed by <u>all authenticated users</u>.</p>
+        <p class="mb-1">Current user from secure api end point:</p>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <ul *ngIf="userFromApi">
+            <li>{{userFromApi.firstName}} {{userFromApi.lastName}}</li>
+        </ul>
+    </div>
+</div> -->
+<mat-card  class="mat-elevation-z30">
+    
+<!--<div class="container"> -->
+ <span >
+    <button mat-raised-button [style.width.px]="400" [style.hight.px]="50" [style.margin-left.px]="70" style="font-size: 16px;" type="button" routerLink="/inventory" color="primary" class="btn btn-secondary">Inventory</button>
+     <!-- <br><br>-->
+    <button mat-raised-button [style.width.px]="400" [style.margin-left.px]="100" style="font-size: 16px;" type="button" routerLink="/notification" color="primary" class="btn btn-secondary">Notifications</button>
+    <br><br> <!--routerLink="/notification" -->
+    <button mat-raised-button [style.width.px]="400" [style.margin-left.px]="70" style="font-size: 16px;" type="button" routerLink="/bnf" color="primary" class="btn btn-secondary">BNF</button>
+     <!--routerLink="/bnf" <br><br>-->
+    <button mat-raised-button [style.width.px]="400" [style.margin-left.px]="100" style="font-size: 16px;" type="button"  color="primary" class="btn btn-secondary">Reports</button>
+    <br><br> <!--routerLink="/reports"-->
+    <button mat-raised-button [style.width.px]="400" [style.margin-left.px]="70" class="btn btn-secondary btn-block" style="font-size: 16px;" type="button" routerLink="/billing" color="primary" >Billing</button>
+     <!--routerLink="/billing" <br><br>-->
+    <button mat-raised-button [style.width.px]="400" [style.margin-left.px]="100" style="font-size: 16px;" type="button" (click)="logout()" color="primary" class="btn btn-secondary">Exit</button>
+ </span>
+<!--</div>-->  
+</mat-card>
+

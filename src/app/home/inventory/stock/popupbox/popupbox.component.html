@@ -1,0 +1,107 @@
+<!-- dialog-box.component.html -->
+<h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<div mat-dialog-content>
+  <!--
+  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Name" matInput [(ngModel)]="local_data.name">
+  </mat-form-field>
+  -->
+
+  <form (submit)="updateInventory(updateproductform)" id="updateproductform" #updateproductform="ngForm">
+    <mat-card class="mat-form-field--inline">
+    <mat-form-field [style.width.px]="410" *ngIf="action != 'Delete'; else elseTemplate" appearance="fill">
+        <mat-label>Product Code</mat-label>
+        <input matInput [(ngModel)]="local_data.pcode"  ngModel  name="pcode" required #nameInput="ngModel">
+    </mat-form-field>
+    <mat-form-field [style.width.px]="410" *ngIf="action != 'Delete'; else disabled" [style.margin-left.px]="100" appearance="fill" >
+    <mat-label>Supplier Code</mat-label>
+        <input matInput [(ngModel)]="local_data.supcode" ngModel  name="supcode" required #nameInput="ngModel">
+    </mat-form-field>
+    <br>
+    <mat-form-field [style.width.px]="410" *ngIf="action != 'Delete'; else disabled" appearance="fill">
+      <mat-label>Product Name</mat-label>
+        <input matInput [(ngModel)]="local_data.pname"  ngModel required  name="pname" >
+    </mat-form-field>
+    <mat-form-field [style.width.px]="410" *ngIf="action != 'Delete'; else disabled" [style.margin-left.px]="100" appearance="fill">
+     <mat-label>Supplier Name</mat-label>
+        <input matInput [(ngModel)]="local_data.supname"  ngModel required name="supname" >
+    </mat-form-field>
+    <br>
+    <mat-form-field [style.width.px]="410" *ngIf="action != 'Delete'; else disabled" appearance="fill">
+    <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="local_data.pdescription" placeholder="Description" ngModel required name="pdescription" >
+    </mat-form-field>
+    <mat-form-field [style.width.px]="410" *ngIf="action != 'Delete'; else disabled" [style.margin-left.px]="100" appearance="fill">
+     <mat-label>Contact Number</mat-label> 
+        <input matInput [(ngModel)]="local_data.supnumber" placeholder="Contact Number" ngModel required name="supnumber" >
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" *ngIf="action != 'Delete'; else disabled" >
+      <mat-label>Product Qty</mat-label>
+        <input matInput [(ngModel)]="local_data.pqty" placeholder="Product Qty" ngModel required  name="pqty" >
+    </mat-form-field>
+    <mat-form-field [style.margin-left.px]="10" *ngIf="action != 'Delete'; else disabled" appearance="fill">
+    <mat-label>Minimum Qty</mat-label> 
+        <input matInput [(ngModel)]="local_data.pminqty" placeholder="Minimum Qty" ngModel required  name="pminqty" >
+    </mat-form-field>
+    <mat-form-field [style.width.px]="410" *ngIf="action != 'Delete'; else disabled" [style.margin-left.px]="100" appearance="fill">
+    <mat-label>Supplier Address</mat-label>
+        <input matInput [(ngModel)]="local_data.supaddress" placeholder="Supplier Address" ngModel required name="supaddress" >
+    </mat-form-field>
+    <br>
+    <mat-form-field [style.width.px]="130" *ngIf="action != 'Delete'; else disabled" appearance="fill">
+    <mat-label>Stock ID</mat-label>
+        <input matInput [(ngModel)]="local_data.stockid" placeholder="Stock ID" ngModel required name="stockid" >
+    </mat-form-field>
+    <mat-form-field [style.width.px]="130" *ngIf="action != 'Delete'; else disabled" [style.margin-left.px]="12" appearance="fill">
+    <mat-label>Unit Price</mat-label>
+        <input matInput [(ngModel)]="local_data.unitprice" placeholder="Unit Price" ngModel required  name="unitprice" >
+    </mat-form-field>
+    <mat-form-field [style.width.px]="129" *ngIf="action != 'Delete'; else disabled" [style.margin-left.px]="12" appearance="fill">
+    <mat-label>Selling Price</mat-label>
+        <input matInput [(ngModel)]="local_data.sellingprice" placeholder="Selling Price" ngModel required name="sellingprice" >
+    </mat-form-field>
+    <br>
+    <mat-form-field *ngIf="action != 'Delete'; else disabled" >
+        <mat-label>Manufact. date mm/dd/yyyy</mat-label>
+        <input matInput [(ngModel)]="local_data.manudate" ngModel name="manudate"  placeholder="Manufact. date mm/dd/yyyy" required [max]="maxDate" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field >
+    <mat-form-field [style.margin-left.px]="15" *ngIf="action != 'Delete'; else disabled">
+       <mat-label>Expiry Date mm/dd/yyyy</mat-label>
+        <input matInput [(ngModel)]="local_data.expdate" ngModel  name="expdate" placeholder="Expiery date mm/dd/yyyy" required [min]="minDate"  [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field><!-- -->
+    <br>
+    <mat-radio-group class="radiobtn" name="paymenttype" aria-label="optionLabel" *ngIf="action != 'Delete'; else disabled" >
+        <mat-radio-button [checked]="!showDateInput" value="1" (click)="radioValueCheck(1)">Cash</mat-radio-button>
+        <mat-radio-button [checked]="showDateInpu" value="2" (click)="radioValueCheck(2)">Credit</mat-radio-button>
+    </mat-radio-group> 
+    <mat-form-field [style.margin-left.px]="32" *ngIf="action != 'Delete'; else disabled">
+       <mat-label>Set due date mm/dd/yyyy</mat-label>
+        <input matInput [(ngModel)]="local_data.creditdue"  name="creditdue" placeholder="Set due date mm/dd/yyyy" [min]="minDate" [disabled]="!showDateInput"  matInput [matDatepicker]="picker2">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <br><br><!--
+    <button mat-button (click)="doAction()" >{{action}}</button>(ngSubmit)="on(userForm)"  (click)="doAction()"
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button> -->
+    </mat-card>
+  </form>
+
+
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.pcode}}</b><br>
+  <!--  <button mat-button (click)="doAction()" >{{action}}</button>(ngSubmit)="on(userForm)"  
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button> -->
+  </ng-template>
+</div>
+<!---->
+<div mat-dialog-actions>
+  <button mat-button (ngSubmit)="on(userForm)" (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
+
+

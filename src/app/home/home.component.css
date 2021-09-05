@@ -1,0 +1,31 @@
+.btn-group-vertical {
+    display: table-cell;
+    font-size: 40px;
+    margin-left: 100px;
+    width: 120px;
+    align-items: center;
+  }
+
+  mat-card {
+    margin: 5rem auto;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    background-color: #316d40;
+  }
+
+  mat-menu{
+    background-color: rgb(29, 214, 214);
+    align-content: center;
+    height: 40%;
+
+  }
+
+  mat-card-mat-card-title {
+    margin: 0.5rem auto;
+    width: 100%;
+    align-content: center;
+    box-shadow: rgb(147, 236, 112);
+  }
+
+  
